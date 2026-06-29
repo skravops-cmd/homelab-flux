@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: memos
-          image: neosmemo/memos:latest
+          image: ghcr.io/usememos/memos:latest
           ports:
             - containerPort: 5230
           volumeMounts:
