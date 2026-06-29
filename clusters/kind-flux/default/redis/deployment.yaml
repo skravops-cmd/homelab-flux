@@ -15,6 +15,6 @@ spec:
     spec:
       containers:
         - name: redis
-          image: redis:7
+          image: redis:7 # {"$imagepolicy": "default:redis"}
           ports:
             - containerPort: 6379

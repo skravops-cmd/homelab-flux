@@ -37,4 +37,20 @@ apps/                  # Application workloads
   home-overlay/        #   podinfo with overlay patch
 clusters/kind-flux/    # Cluster config: Flux Kustomizations + controllers
 infra/                 # Image automation (ImagePolicy, ImageRepository, etc.)
+
+## Image Automation
+
+Regenerate the `ImageUpdateAutomation` resource if needed:
+
+```bash
+flux create image update flux-system \
+--git-repo-ref=flux-system \
+--git-repo-path="./clusters/kind-flux" \
+--checkout-branch=main \
+--push-branch=main \
+--author-name=fluxcdbot \
+--author-email=fluxcdbot@users.noreply.github.com \
+--commit-template="{{range .Updated.Images}}{{println .}}{{end}}" \
+--export > ./clusters/kind-flux/flux-system-automation.yaml
+```
 ```
