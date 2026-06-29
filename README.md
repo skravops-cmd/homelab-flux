@@ -5,6 +5,11 @@ Flux v2-managed Kubernetes cluster on kind.
 ## Prerequisites
 
 - [flux CLI](https://fluxcd.io/flux/installation/#install-the-flux-cli) v2.8.8
+
+```bash
+curl -s https://fluxcd.io/install.sh | sudo bash
+```
+
 - [kind](https://kind.sigs.k8s.io/) cluster running
 - GitHub token with `repo` scope: `export GITHUB_TOKEN=<your-token>`
 
