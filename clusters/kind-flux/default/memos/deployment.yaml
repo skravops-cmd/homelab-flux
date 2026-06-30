@@ -18,6 +18,9 @@ spec:
           image: ghcr.io/usememos/memos:latest
           ports:
             - containerPort: 5230
+          env:
+            - name: MEMOS_PORT
+              value: "5230"
           volumeMounts:
             - name: data
               mountPath: /var/opt/memos
