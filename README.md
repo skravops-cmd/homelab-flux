@@ -1,93 +1,73 @@
 # homelab-flux
 
-Flux v2-managed Kubernetes cluster on kind.
+Flux v2-managed Kubernetes clusters.
+
+- **kind** = dev cluster
+- **k3s** = stage cluster
 
 ## Bootstrap
 
-### 1. Prerequisites
+### Prerequisites
 
-- **kind cluster** running (named `kind-flux`):
-  ```bash
-  kind get clusters   # should list: kind-flux
-  ```
+```bash
+kind get clusters   # should list: kind-flux
+flux version        # verify flux CLI is installed
+export GITHUB_TOKEN=ghp_your_token_here
+```
 
-- **flux CLI** installed:
-  ```bash
-  curl -s https://fluxcd.io/install.sh | sudo bash
-  flux version        # verify
-  ```
-
-- **GitHub token** with `repo` scope:
-  ```bash
-  export GITHUB_TOKEN=ghp_your_token_here
-  ```
-
-### 2. Configure the owner
+### Configure
 
 Edit `Makefile` and change `--owner=skravops-cmd` to your GitHub username.
 
-### 3. Bootstrap Flux into the cluster
+### Bootstrap Flux
 
 ```bash
 make bootstrap
 ```
 
-This installs Flux (with `image-reflector-controller` and `image-automation-controller`) into the cluster and commits the manifests to the `clusters/kind-flux` path in your GitHub repo.
+Installs Flux (with `image-reflector-controller` and `image-automation-controller`) into the cluster and commits manifests to `clusters/kind-flux`.
 
-### 4. Verify
+### Verify
 
 ```bash
 flux get kustomizations
 ```
 
-### 5. Force reconciliation (after pushing changes)
+### Force reconciliation
 
 ```bash
 flux reconcile source git flux-system
-flux reconcile kustomization apps-home-helm
-flux reconcile kustomization infrastructure
+flux reconcile kustomization flux-system
 ```
 
 ## Repository structure
 
 ```
-apps/                  # Application workloads
-  home-base/           #   podinfo as a plain Deployment
-  home-helm/           #   podinfo as a HelmRelease
-  home-overlay/        #   podinfo with overlay patch
-clusters/kind-flux/    # Cluster config: Flux Kustomizations + controllers
-infra/                 # Image automation (ImagePolicy, ImageRepository, etc.)
-
-## Image Automation
-
-Regenerate the `ImageUpdateAutomation` resource if needed:
-
-```bash
-flux create image update flux-system \
---git-repo-ref=flux-system \
---git-repo-path="./clusters/kind-flux" \
---checkout-branch=main \
---push-branch=main \
---author-name=fluxcdbot \
---author-email=fluxcdbot@users.noreply.github.com \
---commit-template="{{range .Updated.Images}}{{println .}}{{end}}" \
---export > ./clusters/kind-flux/flux-system-automation.yaml
+apps/                    # Application workloads
+  nginx/                 #   raw manifests (Deployment + Service)
+    base/
+    overlays/dev/
+    overlays/stage/
+  uptime-kuma/           #   HelmRelease
+    base/
+    overlays/dev/
+    overlays/stage/
+clusters/
+  kind-flux/             # dev cluster config
+    flux-system/         #   Flux controllers + sync manifests
+    kustomization.yaml   #   root overlay including apps + infrastructure
+    apps.yaml            #   references dev overlays
+    infrastructure.yaml  #   references HelmRepository sources
+  k3s-flux/              # stage cluster config (same structure)
+infrastructure/
+  sources/
+    helmrepositories/    # HelmRepository definitions (bitnami)
+Makefile
 ```
 
-## Testing apps via Ingress
+## Clusters
 
-Forward Traefik to an unprivileged local port (no sudo):
-
-```bash
-kubectl -n kube-system port-forward svc/traefik 8080:80 &
-```
-
-Add DNS and access your app:
-
-```bash
-echo "127.0.0.1 memos.local" | sudo tee -a /etc/hosts
-curl http://memos.local
-```
-
-For other apps (kuma, nginx, etc.) create their Ingress + add a DNS entry the same way.
-```
+| Cluster | Path | nginx replicas | uptime-kuma |
+|---------|------|----------------|-------------|
+| kind (dev) | `clusters/kind-flux/` | 1 | dev overlay |
+| k3s (stage) | `clusters/k3s-flux/` | 3 | stage overlay |
