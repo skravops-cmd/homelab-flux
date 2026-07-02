@@ -5,6 +5,10 @@ metadata:
   namespace: uptime-kuma
 spec:
   interval: 5m
+  install:
+    timeout: 30m
+  upgrade:
+    timeout: 30m
   chart:
     spec:
       chart: uptime-kuma
