@@ -1,3 +1,11 @@
+# HelmRepository pointing to HelmForge — a community Helm chart registry.
+# Used by the uptime-kuma HelmRelease.
+#
+# interval: 1h — the index doesn't change often, so hourly refresh is fine.
+# timeout: 5m — increased from the 60s default because the k3s stage cluster
+# has a slow internet connection (~500 KiB/s) and the index is ~3 MB
+# (download time ~6s at full speed, but TCP/TLS overhead adds latency).
+# The default 60s timeout caused "context deadline exceeded" errors on k3s.
 apiVersion: source.toolkit.fluxcd.io/v1
 kind: HelmRepository
 metadata:

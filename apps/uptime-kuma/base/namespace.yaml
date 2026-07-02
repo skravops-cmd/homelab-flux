@@ -1,3 +1,5 @@
+# Namespace for uptime-kuma (Uptime Kuma monitoring dashboard).
+# All uptime-kuma resources (HelmRelease, PVC, etc.) live here.
 apiVersion: v1
 kind: Namespace
 metadata:

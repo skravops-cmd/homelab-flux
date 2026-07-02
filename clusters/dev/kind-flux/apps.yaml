@@ -1,3 +1,5 @@
+# Application Kustomization for the kind (dev) cluster.
+# Separate from infrastructure.yaml so apps can be toggled independently.
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:

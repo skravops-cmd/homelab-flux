@@ -1,3 +1,6 @@
+# Base Deployment for nginx.
+# The replica count here is the default; per-environment overlays override it.
+# Uses the official nginx image pinned to a specific version for reproducibility.
 apiVersion: apps/v1
 kind: Deployment
 metadata:

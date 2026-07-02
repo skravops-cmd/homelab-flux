@@ -1,3 +1,6 @@
+# Infrastructure Kustomization for the kind (dev) cluster.
+# Contains shared resources like HelmRepositories, StorageClasses, etc.
+# Separate from apps.yaml so infra can be applied first or independently.
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:

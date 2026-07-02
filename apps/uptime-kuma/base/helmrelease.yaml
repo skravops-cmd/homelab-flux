@@ -1,3 +1,13 @@
+# HelmRelease for Uptime Kuma — an uptime monitoring dashboard.
+# Installed via the HelmForge Helm chart repository.
+#
+# Timeouts are set to 30m because the k3s stage cluster has a slow internet
+# connection (~500 KiB/s) and the Docker image is ~400 MB, so pulling can
+# take 15+ minutes. The default 5m Helm timeout would always fail there.
+#
+# remediation.retries: -1 means "retry forever" so Flux keeps trying
+# until the image eventually finishes pulling and the pod starts.
+
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:

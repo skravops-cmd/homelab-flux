@@ -1,3 +1,5 @@
+# Stage patch: override base replicas to 3.
+# Stage should mimic production with multiple replicas for availability.
 apiVersion: apps/v1
 kind: Deployment
 metadata:

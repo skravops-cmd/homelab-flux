@@ -1,3 +1,5 @@
+# Namespace for the nginx web server.
+# All nginx-related resources (Deployment, Service) live here.
 apiVersion: v1
 kind: Namespace
 metadata:

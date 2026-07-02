@@ -1,3 +1,7 @@
+# HelmRepository pointing to the Bitnami chart repository.
+# Not currently used by any workload — kept as a baseline for future charts.
+# The 1-minute interval means Flux fetches the index frequently;
+# consider increasing to 1h+ in production to reduce network churn.
 apiVersion: source.toolkit.fluxcd.io/v1
 kind: HelmRepository
 metadata:

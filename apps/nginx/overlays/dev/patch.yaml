@@ -1,3 +1,5 @@
+# Dev patch: override base replicas to 1.
+# The kind cluster runs on a single workstation node, so HA is unnecessary.
 apiVersion: apps/v1
 kind: Deployment
 metadata:

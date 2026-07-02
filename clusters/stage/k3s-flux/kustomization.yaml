@@ -1,3 +1,6 @@
+# Root Kustomization for the k3s (stage) cluster.
+# This is the entry point referenced by gotk-sync.yaml's path.
+# It applies the stage overlay for each app and all shared infrastructure.
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:

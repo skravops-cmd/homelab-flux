@@ -1,3 +1,6 @@
+# Dev overlay for nginx.
+# Inherits the base resources and applies environment-specific patches.
+# The dev cluster (kind) is single-node, so 1 replica is sufficient.
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
