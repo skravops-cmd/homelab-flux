@@ -1,0 +1,12 @@
+# HelmRepository for the official Traefik Helm chart.
+# Used to deploy Traefik as the default ingress controller,
+# mirroring the behavior of a stock k3s install.
+# URL: https://helm.traefik.io/traefik — maintained by Traefik Labs.
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: HelmRepository
+metadata:
+  name: traefik
+  namespace: flux-system
+spec:
+  interval: 1h
+  url: https://helm.traefik.io/traefik

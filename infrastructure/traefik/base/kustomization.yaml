@@ -1,0 +1,8 @@
+# Kustomize base for Traefik ingress controller.
+# Bundles the Namespace and HelmRelease so overlays can reference them.
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - namespace.yaml
+  - helmrelease.yaml

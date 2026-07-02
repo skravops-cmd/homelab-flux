@@ -6,4 +6,5 @@ kind: Kustomization
 resources:
   - ../../../apps/nginx/overlays/stage
   - ../../../apps/uptime-kuma/overlays/stage
+  - ../../../infrastructure/traefik/overlays/stage
   - ../../../infrastructure/sources/helmrepositories

@@ -1,0 +1,53 @@
+# HelmRelease for Traefik ingress controller.
+# Mirrors the default k3s Traefik deployment as closely as possible:
+#   - system-cluster-critical priority
+#   - kubernetesIngress provider with publishedService enabled
+#   - default IngressClass
+#   - tolerations for control-plane nodes
+#   - Prometheus scrape annotations
+#   - LoadBalancer service type (k3s ServiceLB assigns the IP;
+#     on kind, use kubectl port-forward)
+#
+# Chart source: official Traefik Helm chart (helm.traefik.io/traefik).
+# The official image is used (not rancher-mirrored) — functionally identical.
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: traefik
+  namespace: traefik
+spec:
+  interval: 5m
+  chart:
+    spec:
+      chart: traefik
+      version: "33.x"
+      sourceRef:
+        kind: HelmRepository
+        name: traefik
+        namespace: flux-system
+  values:
+    priorityClassName: system-cluster-critical
+
+    providers:
+      kubernetesIngress:
+        publishedService:
+          enabled: true
+
+    ingressClass:
+      enabled: true
+      isDefaultClass: true
+
+    tolerations:
+      - key: CriticalAddonsOnly
+        operator: Exists
+      - key: node-role.kubernetes.io/control-plane
+        operator: Exists
+        effect: NoSchedule
+
+    deployment:
+      podAnnotations:
+        prometheus.io/port: "8082"
+        prometheus.io/scrape: "true"
+
+    service:
+      type: LoadBalancer

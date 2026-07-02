@@ -6,3 +6,4 @@ kind: Kustomization
 resources:
   - bitnami.yaml
   - helmforge.yaml
+  - traefik.yaml
