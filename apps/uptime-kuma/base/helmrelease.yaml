@@ -7,8 +7,12 @@ spec:
   interval: 5m
   install:
     timeout: 30m
+    remediation:
+      retries: -1
   upgrade:
     timeout: 30m
+    remediation:
+      retries: -1
   chart:
     spec:
       chart: uptime-kuma
