@@ -52,6 +52,10 @@ apps/                    # Application workloads
     base/
     overlays/dev/
     overlays/stage/
+  homepage/              #   raw manifests (Deployment + Service + Ingress)
+    base/
+    overlays/dev/
+    overlays/stage/
 clusters/
   kind-flux/             # dev cluster config
     flux-system/         #   Flux controllers + sync manifests
@@ -67,7 +71,7 @@ Makefile
 
 ## Clusters
 
-| Cluster | Path | nginx replicas | uptime-kuma | traefik access |
-|---------|------|----------------|-------------|----------------|
-| kind (dev) | `clusters/kind-flux/` | 1 | dev overlay | `kubectl port-forward -n kube-system svc/traefik 8080:80 8443:443` |
-| k3s (stage) | `clusters/k3s-flux/` | 3 | stage overlay | LoadBalancer IP (k3s ServiceLB) |
+| Cluster | Path | nginx replicas | uptime-kuma | homepage | traefik access |
+|---------|------|----------------|-------------|----------|----------------|
+| kind (dev) | `clusters/kind-flux/` | 1 | dev overlay | raw manifests | `kubectl port-forward -n kube-system svc/traefik 8080:80 8443:443`; `kubectl port-forward -n homepage svc/homepage 3000:3000` |
+| k3s (stage) | `clusters/k3s-flux/` | 3 | stage overlay | raw manifests | LoadBalancer IP (k3s ServiceLB); `http://homepage.local` (add to /etc/hosts) |
