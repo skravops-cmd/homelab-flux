@@ -6,7 +6,7 @@
 #   - tolerations for control-plane nodes
 #   - Prometheus scrape annotations
 #   - LoadBalancer service type (k3s ServiceLB assigns the IP;
-#     on kind, use kubectl port-forward)
+#     on kind, use: kubectl port-forward -n kube-system svc/traefik 8080:80 8443:443)
 #
 # Chart source: official Traefik Helm chart (helm.traefik.io/traefik).
 # The official image is used (not rancher-mirrored) — functionally identical.
@@ -14,7 +14,7 @@ apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: traefik
-  namespace: traefik
+  namespace: kube-system
 spec:
   interval: 5m
   chart:

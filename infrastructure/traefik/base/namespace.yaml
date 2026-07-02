@@ -1,7 +1,0 @@
-# Namespace for the Traefik ingress controller.
-# Traefik runs here as a Deployment, serving as the cluster's default
-# ingress controller (matching stock k3s behavior).
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: traefik

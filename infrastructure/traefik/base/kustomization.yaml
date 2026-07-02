@@ -1,8 +1,8 @@
 # Kustomize base for Traefik ingress controller.
-# Bundles the Namespace and HelmRelease so overlays can reference them.
+# Traefik installs into kube-system (matching stock k3s behavior),
+# so no separate Namespace resource is needed.
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
 resources:
-  - namespace.yaml
   - helmrelease.yaml

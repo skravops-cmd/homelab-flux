@@ -69,5 +69,5 @@ Makefile
 
 | Cluster | Path | nginx replicas | uptime-kuma | traefik access |
 |---------|------|----------------|-------------|----------------|
-| kind (dev) | `clusters/kind-flux/` | 1 | dev overlay | `kubectl port-forward -n traefik svc/traefik 8080:80 8443:443` |
+| kind (dev) | `clusters/kind-flux/` | 1 | dev overlay | `kubectl port-forward -n kube-system svc/traefik 8080:80 8443:443` |
 | k3s (stage) | `clusters/k3s-flux/` | 3 | stage overlay | LoadBalancer IP (k3s ServiceLB) |

@@ -1,7 +1,7 @@
 # Dev overlay for Traefik (kind cluster).
 # Pure inherit from base — no patches needed.
 # LoadBalancer stays Pending on kind (no MetalLB); access Traefik via:
-#   kubectl port-forward -n traefik svc/traefik 8080:80 8443:443
+#   kubectl port-forward -n kube-system svc/traefik 8080:80 8443:443
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
