@@ -8,7 +8,7 @@ bootstrap:
 		--owner=skravops-cmd \
 		--repository=homelab-flux \
 		--branch=main \
-		--path=clusters/kind-flux \
+		--path=clusters/dev/kind-flux \
 		--personal
 
 bootstrap-k3s:
@@ -18,5 +18,5 @@ bootstrap-k3s:
 		--owner=skravops-cmd \
 		--repository=homelab-flux \
 		--branch=main \
-		--path=clusters/k3s-flux \
+		--path=clusters/stage/k3s-flux \
 		--personal
