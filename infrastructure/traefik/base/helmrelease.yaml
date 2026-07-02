@@ -4,7 +4,6 @@
 #   - kubernetesIngress provider with publishedService enabled
 #   - default IngressClass
 #   - tolerations for control-plane nodes
-#   - Prometheus scrape annotations
 #   - LoadBalancer service type (k3s ServiceLB assigns the IP;
 #     on kind, use: kubectl port-forward -n kube-system svc/traefik 8080:80 8443:443)
 #
@@ -43,11 +42,6 @@ spec:
       - key: node-role.kubernetes.io/control-plane
         operator: Exists
         effect: NoSchedule
-
-    deployment:
-      podAnnotations:
-        prometheus.io/port: "8082"
-        prometheus.io/scrape: "true"
 
     service:
       type: LoadBalancer
