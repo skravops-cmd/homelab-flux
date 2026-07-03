@@ -73,5 +73,34 @@ Makefile
 
 | Cluster | Path | nginx replicas | uptime-kuma | homepage | traefik access |
 |---------|------|----------------|-------------|----------|----------------|
-| kind (dev) | `clusters/kind-flux/` | 1 | dev overlay | raw manifests | `kubectl port-forward -n kube-system svc/traefik 8080:80 8443:443`; `kubectl port-forward -n homepage svc/homepage 3000:3000` |
-| k3s (stage) | `clusters/k3s-flux/` | 3 | stage overlay | raw manifests | LoadBalancer IP (k3s ServiceLB); `http://homepage.local` (add to /etc/hosts) |
+| kind (dev) | `clusters/kind-flux/` | 1 | dev overlay | raw manifests | `kubectl port-forward -n kube-system svc/traefik 8080:80` (see [Access](#access)) |
+| k3s (stage) | `clusters/k3s-flux/` | 3 | stage overlay | raw manifests | Traefik LoadBalancer IP; needs real domain |
+
+## Access
+
+### Dev (kind)
+
+kind has no built-in LoadBalancer, so port-forward Traefik to reach all Ingress routes:
+
+```bash
+# Terminal 1 — keep this running
+kubectl port-forward -n kube-system svc/traefik 8080:80
+```
+
+Add to your Windows hosts file (`C:\Windows\System32\drivers\etc\hosts`):
+```
+127.0.0.1 nginx.local uptime.local homepage.local
+```
+
+Then open in your browser:
+- http://nginx.local:8080
+- http://uptime.local:8080
+- http://homepage.local:8080
+
+### Stage (k3s)
+
+k3s ServiceLB assigns a real LoadBalancer IP to Traefik. Once you have a domain, update the Ingress hosts from `.local` to your domain and add DNS A records pointing to the Traefik IP.
+
+```bash
+kubectl get svc -n kube-system traefik -o jsonpath='{.status.loadBalancer.ingress[0].ip}'
+```
