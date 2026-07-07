@@ -11,3 +11,4 @@ resources:
   - service.yaml
   - deployment.yaml
   - ingress.yaml
+  - certificate.yaml

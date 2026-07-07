@@ -1,0 +1,20 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: homepage
+  namespace: homepage
+spec:
+  rules:
+    - host: homepage.skravops-cmd.space
+  tls:
+    - hosts:
+        - homepage.skravops-cmd.space
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: homepage-tls
+  namespace: homepage
+spec:
+  dnsNames:
+    - homepage.skravops-cmd.space

@@ -3,7 +3,4 @@ kind: Kustomization
 
 resources:
   - ../../base
-
-patches:
-  - path: patch-ingress.yaml
-  - path: patch-deployment.yaml
+  - clusterissuer.yaml
