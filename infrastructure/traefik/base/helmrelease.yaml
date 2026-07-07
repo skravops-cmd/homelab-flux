@@ -49,6 +49,10 @@ spec:
       dashboard: true
       debug: false
 
+    ingressRoute:
+      dashboard:
+        enabled: true
+
     ports:
       web:
         port: 8000
