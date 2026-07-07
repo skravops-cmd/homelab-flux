@@ -4,8 +4,8 @@
 #   - kubernetesIngress provider with publishedService enabled
 #   - default IngressClass
 #   - tolerations for control-plane nodes
-#   - ClusterIP service (Traefik uses hostPort 80/443 directly; on kind,
-#     use: kubectl port-forward -n kube-system svc/traefik 8080:80 8443:443)
+#   - NodePort service (fixed nodePorts 30080/30443 for Cloudflare Tunnel;
+#     on kind, use: kubectl port-forward -n kube-system svc/traefik 8080:80 8443:443)
 #
 # Chart source: official Traefik Helm chart (helm.traefik.io/traefik).
 # The official image is used (not rancher-mirrored) — functionally identical.
@@ -43,13 +43,8 @@ spec:
         operator: Exists
         effect: NoSchedule
 
-    ports:
-      web:
-        port: 8000
-        hostPort: 80
-      websecure:
-        port: 8443
-        hostPort: 443
-
     service:
-      type: ClusterIP
+      type: NodePort
+      nodePorts:
+        web: 30080
+        websecure: 30443
