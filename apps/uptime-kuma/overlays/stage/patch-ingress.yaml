@@ -1,11 +1,6 @@
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: uptime-kuma
-  namespace: uptime-kuma
-spec:
-  rules:
-    - host: uptime.skravops-cmd.space
-  tls:
-    - hosts:
-        - uptime.skravops-cmd.space
+- op: replace
+  path: /spec/rules/0/host
+  value: uptime.skravops-cmd.space
+- op: replace
+  path: /spec/tls/0/hosts/0
+  value: uptime.skravops-cmd.space

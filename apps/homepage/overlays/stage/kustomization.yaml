@@ -6,4 +6,9 @@ resources:
 
 patches:
   - path: patch-ingress.yaml
+    target:
+      group: networking.k8s.io
+      version: v1
+      kind: Ingress
+      name: homepage
   - path: patch-deployment.yaml

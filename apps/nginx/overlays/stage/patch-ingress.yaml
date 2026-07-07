@@ -1,11 +1,6 @@
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: nginx
-  namespace: nginx
-spec:
-  rules:
-    - host: nginx.skravops-cmd.space
-  tls:
-    - hosts:
-        - nginx.skravops-cmd.space
+- op: replace
+  path: /spec/rules/0/host
+  value: nginx.skravops-cmd.space
+- op: replace
+  path: /spec/tls/0/hosts/0
+  value: nginx.skravops-cmd.space

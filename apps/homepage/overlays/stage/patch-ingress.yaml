@@ -1,11 +1,6 @@
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: homepage
-  namespace: homepage
-spec:
-  rules:
-    - host: homepage.skravops-cmd.space
-  tls:
-    - hosts:
-        - homepage.skravops-cmd.space
+- op: replace
+  path: /spec/rules/0/host
+  value: homepage.skravops-cmd.space
+- op: replace
+  path: /spec/tls/0/hosts/0
+  value: homepage.skravops-cmd.space
