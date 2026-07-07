@@ -45,8 +45,11 @@ spec:
 
     ports:
       web:
-        redirectTo:
-          port: websecure
+        port: 8000
+        hostPort: 80
+      websecure:
+        port: 8443
+        hostPort: 443
 
     service:
       type: LoadBalancer
