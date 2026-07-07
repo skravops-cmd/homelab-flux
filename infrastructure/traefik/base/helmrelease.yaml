@@ -6,7 +6,8 @@
 #   - tolerations for control-plane nodes
 #   - LoadBalancer service with hostPort 80/443 (k3s ServiceLB disabled
 #     via annotation to prevent svclb daemonset conflict);
-#     on kind, use: kubectl port-forward -n kube-system svc/traefik 8080:80 8443:443)
+#     Dashboard on port 9000 / nodePort 32080 (internal LAN only, not tunneled);
+#     on kind, use: kubectl port-forward -n kube-system svc/traefik 9000:9000)
 #
 # Chart source: official Traefik Helm chart (helm.traefik.io/traefik).
 # The official image is used (not rancher-mirrored) — functionally identical.
@@ -44,6 +45,10 @@ spec:
         operator: Exists
         effect: NoSchedule
 
+    api:
+      dashboard: true
+      debug: false
+
     ports:
       web:
         port: 8000
@@ -51,6 +56,10 @@ spec:
       websecure:
         port: 8443
         hostPort: 443
+      traefik:
+        port: 9000
+        expose: true
+        nodePort: 32080
 
     service:
       type: LoadBalancer
