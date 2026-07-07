@@ -6,7 +6,7 @@ metadata:
   labels:
     app.kubernetes.io/name: uptime-kuma
   annotations:
-    traefik.ingress.kubernetes.io/redirect-entry-point: https
+    traefik.ingress.kubernetes.io/redirect-entry-point: websecure
 spec:
   ingressClassName: traefik
   rules:
