@@ -9,12 +9,3 @@ spec:
   tls:
     - hosts:
         - uptime.skravops-cmd.space
----
-apiVersion: cert-manager.io/v1
-kind: Certificate
-metadata:
-  name: uptime-kuma-tls
-  namespace: uptime-kuma
-spec:
-  dnsNames:
-    - uptime.skravops-cmd.space

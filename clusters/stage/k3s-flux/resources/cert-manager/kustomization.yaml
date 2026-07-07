@@ -3,6 +3,6 @@ kind: Kustomization
 
 resources:
   - ../../../../../infrastructure/cert-manager/overlays/stage/clusterissuer.yaml
-  - ../../../../../apps/nginx/base/certificate.yaml
-  - ../../../../../apps/uptime-kuma/base/certificate.yaml
-  - ../../../../../apps/homepage/base/certificate.yaml
+  - ../../../../../apps/nginx/overlays/stage/certificate.yaml
+  - ../../../../../apps/uptime-kuma/overlays/stage/certificate.yaml
+  - ../../../../../apps/homepage/overlays/stage/certificate.yaml

@@ -9,12 +9,3 @@ spec:
   tls:
     - hosts:
         - homepage.skravops-cmd.space
----
-apiVersion: cert-manager.io/v1
-kind: Certificate
-metadata:
-  name: homepage-tls
-  namespace: homepage
-spec:
-  dnsNames:
-    - homepage.skravops-cmd.space
