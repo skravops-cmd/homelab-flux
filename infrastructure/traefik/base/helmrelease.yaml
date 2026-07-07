@@ -43,8 +43,13 @@ spec:
         operator: Exists
         effect: NoSchedule
 
+    ports:
+      web:
+        port: 8000
+        nodePort: 30080
+      websecure:
+        port: 8443
+        nodePort: 30443
+
     service:
       type: NodePort
-      nodePorts:
-        web: 30080
-        websecure: 30443
