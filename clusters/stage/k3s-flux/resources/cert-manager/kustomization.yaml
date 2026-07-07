@@ -2,7 +2,7 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
 resources:
-  - ../../../../infrastructure/cert-manager/overlays/stage/clusterissuer.yaml
-  - ../../../../apps/nginx/base/certificate.yaml
-  - ../../../../apps/uptime-kuma/base/certificate.yaml
-  - ../../../../apps/homepage/base/certificate.yaml
+  - ../../../../../infrastructure/cert-manager/overlays/stage/clusterissuer.yaml
+  - ../../../../../apps/nginx/base/certificate.yaml
+  - ../../../../../apps/uptime-kuma/base/certificate.yaml
+  - ../../../../../apps/homepage/base/certificate.yaml
