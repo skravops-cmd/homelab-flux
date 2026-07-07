@@ -7,4 +7,3 @@ resources:
   - namespace.yaml
   - helmrelease.yaml
   - ingress.yaml
-  - certificate.yaml

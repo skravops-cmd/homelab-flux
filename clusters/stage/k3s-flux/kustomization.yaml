@@ -9,4 +9,5 @@ resources:
   - ../../../apps/homepage/overlays/stage
   - ../../../infrastructure/traefik/overlays/stage
   - ../../../infrastructure/sources/helmrepositories
-  - ../../../infrastructure/cert-manager/overlays/stage
+  - cert-manager.yaml
+  - cert-manager-resources.yaml
