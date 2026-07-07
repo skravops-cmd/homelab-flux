@@ -11,7 +11,6 @@ metadata:
     gethomepage.dev/group: Infrastructure
     gethomepage.dev/icon: homepage.png
     gethomepage.dev/name: Homepage
-    traefik.ingress.kubernetes.io/redirect-entry-point: websecure
 spec:
   ingressClassName: traefik
   rules:

@@ -43,5 +43,10 @@ spec:
         operator: Exists
         effect: NoSchedule
 
+    ports:
+      web:
+        redirectTo:
+          port: websecure
+
     service:
       type: LoadBalancer

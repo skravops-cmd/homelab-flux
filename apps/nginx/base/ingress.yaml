@@ -5,8 +5,7 @@ metadata:
   namespace: nginx
   labels:
     app.kubernetes.io/name: nginx
-  annotations:
-    traefik.ingress.kubernetes.io/redirect-entry-point: websecure
+  annotations: {}
 spec:
   ingressClassName: traefik
   rules:

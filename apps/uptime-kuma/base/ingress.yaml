@@ -5,8 +5,7 @@ metadata:
   namespace: uptime-kuma
   labels:
     app.kubernetes.io/name: uptime-kuma
-  annotations:
-    traefik.ingress.kubernetes.io/redirect-entry-point: websecure
+  annotations: {}
 spec:
   ingressClassName: traefik
   rules:
