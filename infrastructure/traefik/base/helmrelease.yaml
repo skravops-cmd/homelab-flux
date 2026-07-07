@@ -58,7 +58,8 @@ spec:
         hostPort: 443
       traefik:
         port: 9000
-        expose: true
+        expose:
+          default: true
         nodePort: 32080
 
     service:
