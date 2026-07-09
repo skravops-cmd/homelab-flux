@@ -4,10 +4,9 @@
 #   - kubernetesIngress provider with publishedService enabled
 #   - default IngressClass
 #   - tolerations for control-plane nodes
-#   - LoadBalancer service with hostPort 80/443 (k3s ServiceLB disabled
-#     via annotation to prevent svclb daemonset conflict);
+#   - LoadBalancer service with svclb handling hostPort (default k3s behavior);
 #     Dashboard on port 9000 / nodePort 32080 (internal LAN only, not tunneled);
-#     on kind, use: kubectl port-forward -n kube-system svc/traefik 9000:9000)
+#     on kind, use: kubectl port-forward -n kube-system svc/traefik 8080:80 8443:443)
 #
 # Chart source: official Traefik Helm chart (helm.traefik.io/traefik).
 # The official image is used (not rancher-mirrored) — functionally identical.
@@ -56,10 +55,8 @@ spec:
     ports:
       web:
         port: 8000
-        hostPort: 80
       websecure:
         port: 8443
-        hostPort: 443
       traefik:
         port: 9000
         expose:
@@ -68,5 +65,3 @@ spec:
 
     service:
       type: LoadBalancer
-      annotations:
-        svccontroller.k3s.cattle.io/enablelb: "false"
